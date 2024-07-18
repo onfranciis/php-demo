@@ -1,9 +1,7 @@
 <?php
 
-$isValid = false;
-$error = "";
-
-
+$notValid = false;
+$error = null;
 
 function treatInput($value, $title)
 {
@@ -14,7 +12,7 @@ function treatInput($value, $title)
 
     if (strlen($value) == 0) {
         $error = $title . " was not valid!";
-        return;
+        return null;
     } else {
         return $value;
     }
@@ -25,13 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reg = treatInput(htmlspecialchars($_POST['reg']), "Reg Number");
     $lname = treatInput(htmlspecialchars($_POST['lname']), "Last Name");
     $fname = treatInput(htmlspecialchars($_POST['fname']), "First Name");
-
-
-
-    $isValid = !(is_null($fname) && is_null($lname) && is_null($reg) && is_null($course)
-    );
-} else {
 }
+
+$notValid = (isset($fname) && isset($lname) && isset($reg) && isset($course))
 ?>
 
 
@@ -42,16 +36,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onukwu Francis - 2020/249371</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
 
-    <?php if ($error) {
-        echo "
-    <p>$error</p>
-    ";
-    }
-    ?>
+
+
+    <h2>Demo Registration</h2>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <label for="fname">
@@ -80,13 +72,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" value="Register">
     </form>
 
+    <?php if ($error) {
+        echo "
+    <p class='error'>$error</p>
+    ";
+    }
+    ?>
+
 
     <?php
-    if ($isValid) {
+    if ($notValid) {
         echo
-        "<div>
+        "<div class='output'>
+        <p>
         First name - $fname
-        </div>";
+        </p>
+        
+        <p>
+        Last name - $lname
+        </p>
+
+        
+        <p>
+        Course Reg - $course
+        </p>
+
+        
+        <p>
+        Reg Number - $reg
+        </p>
+
+        </div>
+        ";
     }
     ?>
 

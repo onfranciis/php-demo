@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body,
+form,
+.output {
+  background-color: powderblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+form,
+label {
+  gap: 20px;
+}
+
+input {
+  padding: 3px;
+  margin-top: 3px;
+}
+
+input[type="submit"] {
+  padding: 5px 10px;
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.613);
+  padding: 5px;
+  border-radius: 3px;
+  color: white;
+}
+
+.output {
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  gap: 10px;
+}
